@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>登录页面</title>
+	<style>
+	*{
+ 		margin: 0;
+ 		padding: 0;
+ 		font-family: YouYuan;
+	}
+		.title{
+			width: 100%;
+			height:200px; 
+			margin-top: 20px;
+			text-align: center;
+		}
+	.box{
+ 		width: 390px;
+ 		height: 320px;
+ 		border: solid 1px #ddd;
+ 		background: #FFF;
+ 		position: absolute;
+ 		left: 50%;
+	    top:42%;
+	    margin-left: -195px;
+ 		margin-top: -160px;
+ 		text-align: center;
+		font-size: 12px;
+	}
+	.box h2{
+ 		font-weight: normal;
+ 		color:#666;
+ 		font-size: 16px;
+ 		line-height: 40px;
+ 		overflow: hidden;
+ 		text-align: center;
+	 	border-bottom: solid 1px #ddd;
+ 		background: #f7f7f7;
+	}
+	.input_box{
+	 	width:350px;
+ 		padding-bottom: 15px;
+ 		margin: 0 auto;
+ 		overflow: hidden;
+	}
+	</style>
+</head>
+<body>
+	<div class="title">
+		<h1>图书馆管理系统</h1>
+	</div>
+	<div class="box">
+ 		<h2>登录</h2>
+ 		<div class="input_box">
+  		<input id="uname" type="text" name="user" placeholder="请输入用户名">
+ 		</div>
+ 		<div class="input_box">
+  		<input id="upass" type="password" name="psw" placeholder="请输入密码">
+ 		</div>
+ 		<div id="error_box"><br></div>
+ 		<div class="input_box">
+  		<button type="button" class="btn btn-primary" onclick="fnLogin()">登录</button>   
+  		<a href="regist.html"><input type="button" class="btn btn-info" name="regist" value="注册" ></a><br>
+		</div></div>
+		
+	<div class="footer">
+		
+	</div>
+</body>
+</html>
