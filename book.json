@@ -1,0 +1,29 @@
+{
+"method":"ajaxText",
+	"result":{
+		"book":[
+			{
+				"name":"《哈利波特与魔法石》",
+				"author":"J.K.罗琳",
+				"number":11,
+				"publishing house":"人民文学出版社",
+				"price":"￥19.50"
+			},
+			{
+				"name":"《塔希里亚故事集》",
+				"author":"吴淼",
+				"number":23,
+				"publishing":"接力出版社",
+				"price":"￥26.00"
+			},
+			{
+				"name":"《JavaScript宝典》",
+				"author":"(美国)(Goodman.D.)古德曼 、(美国)(Morrison.M.)莫里森",
+				"number":7,
+				"publishing house":"人民邮电出版社",
+				"price":"￥99.00"
+			}
+		],
+		"totalnumber":2
+	}	
+}
