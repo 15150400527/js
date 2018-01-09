@@ -5,18 +5,34 @@
     <title>图书管理系统</title>
     <script type="text/javascript" src="mode.js"></script>
     <style>
-	table{
-		width：800px;
-		height:100px;
+		table{
+			width：800px;
+			height:100px;
+			margin-left: 10%;
 		}
 		th{
 			width: 100px;
 			height: 30px;
 			border: 1px solid darkgoldenrod;
 		}
+		.add{
+			width: 100%;
+			height: 50px;
+			margin-top: 30px;
+			margin-left: 10%;
+		}
 	</style>
 </head>
 <body>
+  <div class="add">
+   书名：<input type="text" placeholder="请输入添加书籍的名称" id="name">
+   作者：<input type="text" placeholder="请输入添加书籍的作者" id="author">
+   数量：<input type="text" placeholder="请输入添加书籍的数量" id="number">
+   出版社<input type="text" placeholder="请输入添加书籍的出版社" id="publish">
+   单价：<input type="text" placeholder="请输入添加书籍的单价" id="price">
+   <input type="button" value="添加" onclick="add()">
+  </div>
+   
    <table border="1" cellspacing="0" cellpadding="0" id="tab">
 			<tr id="clone">
 				<th>图书名</th>
@@ -26,12 +42,7 @@
 				<th>单价</th>
 			</tr>
 		</table>
-   <input type="text" value="请输入添加书籍的名称">
-   <input type="text" value="请输入添加书籍的作者">
-   <input type="text" value="请输入添加书籍的数量">
-   <input type="text" value="请输入添加书籍的出版社">
-   <input type="text" value="请输入添加书籍的单价">
-   <input type="button" value="添加">
+   
     <script>
 		//浏览书籍
 		var xhr=new XMLHttpRequest();
@@ -64,10 +75,29 @@
 			}
 		}
 		//添加书籍
-        var sys=new BookManagerSystem();
-        console.log(sys);
-        sys.addBook("1111","222",21,"333","44");
-        console.log(sys.bookArr);
+		function add(){
+			var name=document.getElementById("name").value;
+        	var author=document.getElementById("author").value;
+			var number=document.getElementById("number").value;
+			var publishing=document.getElementById("publish").value;
+			var price=document.getElementById("price").value;
+		
+        	var sys=new BookManagerSystem();
+        	console.log(sys);
+        	sys.addBook(name,author,number,publishing,price);
+        	console.log(sys.bookArr);
+				var oldTr = document.getElementById("clone");
+				var newTr = oldTr.cloneNode(true);
+				var tds = newTr.getElementsByTagName("th");
+				var tab=document.getElementById("tab");
+				tds[0].innerHTML=name;
+				tds[1].innerHTML=author;
+				tds[2].innerHTML=number;
+				tds[3].innerHTML=publishing;
+				tds[4].innerHTML=price;
+				tab.appendChild(newTr);
+		}
+		
     </script>
 </body>
 </html>
