@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>图书管理系统</title>
-	<style>
+    <meta charset="UTF-8">
+    <title>图书管理系统</title>
+    <script type="text/javascript" src="mode.js"></script>
+    <style>
 	table{
 		width：800px;
 		height:100px;
 		}
 		th{
-			width: 60px;
+			width: 100px;
 			height: 30px;
 			border: 1px solid darkgoldenrod;
 		}
 	</style>
 </head>
 <body>
-	<table border="1" cellspacing="0" cellpadding="0" id="tab">
+   <table border="1" cellspacing="0" cellpadding="0" id="tab">
 			<tr id="clone">
 				<th>图书名</th>
 				<th>作者名</th>
@@ -25,9 +26,16 @@
 				<th>单价</th>
 			</tr>
 		</table>
-	<script>
+   <input type="text" value="请输入添加书籍的名称">
+   <input type="text" value="请输入添加书籍的作者">
+   <input type="text" value="请输入添加书籍的数量">
+   <input type="text" value="请输入添加书籍的出版社">
+   <input type="text" value="请输入添加书籍的单价">
+   <input type="button" value="添加">
+    <script>
+		//浏览书籍
 		var xhr=new XMLHttpRequest();
-		xhr.open("get","http://127.0.0.1:56622/book.json",true);
+		xhr.open("get","http://127.0.0.1:64574/book.json",true);
 		xhr.send();
 		xhr.onreadystatechange=function(){
 			if(xhr.readyState==4){
@@ -55,6 +63,11 @@
 				console.log(data.result.book[i].name);
 			}
 		}
-	</script>
+		//添加书籍
+        var sys=new BookManagerSystem();
+        console.log(sys);
+        sys.addBook("1111","222",21,"333","44");
+        console.log(sys.bookArr);
+    </script>
 </body>
 </html>

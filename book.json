@@ -6,7 +6,7 @@
 				"name":"《哈利波特与魔法石》",
 				"author":"J.K.罗琳",
 				"number":11,
-				"publishing house":"人民文学出版社",
+				"publishing":"人民文学出版社",
 				"price":"￥19.50"
 			},
 			{
@@ -20,10 +20,24 @@
 				"name":"《JavaScript宝典》",
 				"author":"(美国)(Goodman.D.)古德曼 、(美国)(Morrison.M.)莫里森",
 				"number":7,
-				"publishing house":"人民邮电出版社",
+				"publishing":"人民邮电出版社",
 				"price":"￥99.00"
+			},
+			{
+				"name":"《Head First C#》",
+				"author":"斯泰尔曼",
+				"number":17,
+				"publishing":"中国电力出版社",
+				"price":"￥98.00"
+			},
+			{
+				"name":"《MySQL必知必会》",
+				"author":"(英国)(BenForta)福塔",
+				"number":21,
+				"publishing":"人民邮电出版社",
+				"price":"￥39.00"
 			}
 		],
-		"totalnumber":2
+		"totalnumber":4
 	}	
 }
