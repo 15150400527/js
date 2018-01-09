@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <title>图书管理系统</title>
     <script type="text/javascript" src="mode.js"></script>
+    <script type="text/javascript" src="jquery-3.2.1.js"></script>
     <style>
 		table{
-			width：800px;
+			width：100%;
 			height:100px;
 			margin-left: 10%;
+			margin-right: 10%;
 		}
 		th{
-			width: 100px;
+			width: 500px;
 			height: 30px;
 			border: 1px solid darkgoldenrod;
 		}
@@ -30,7 +32,7 @@
    数量：<input type="text" placeholder="请输入添加书籍的数量" id="number">
    出版社<input type="text" placeholder="请输入添加书籍的出版社" id="publish">
    单价：<input type="text" placeholder="请输入添加书籍的单价" id="price">
-   <input type="button" value="添加" onclick="add()">
+   <input type="button" value="添加" id="add">
   </div>
    
    <table border="1" cellspacing="0" cellpadding="0" id="tab">
@@ -40,10 +42,12 @@
 				<th>数量</th>
 				<th>出版社</th>
 				<th>单价</th>
+				<th>操作</th>
 			</tr>
 		</table>
    
     <script>
+		var sys=new BookManagerSystem();
 		//浏览书籍
 		var xhr=new XMLHttpRequest();
 		xhr.open("get","http://127.0.0.1:64574/book.json",true);
@@ -66,24 +70,31 @@
 				var tds = newTr.getElementsByTagName("th");
 				var tab=document.getElementById("tab");
 				tds[0].innerHTML=data.result.book[i].name;
+				var name=data.result.book[i].name;
 				tds[1].innerHTML=data.result.book[i].author;
+				var author=data.result.book[i].author;
 				tds[2].innerHTML=data.result.book[i].number;
+				var number=data.result.book[i].number;
 				tds[3].innerHTML=data.result.book[i].publishing;
+				var publishing=data.result.book[i].publishing;
 				tds[4].innerHTML=data.result.book[i].price;
+				var price=data.result.book[i].price;
+				
 				tab.appendChild(newTr);
+				var book=new Book(name,author,number,publishing,price);
+        		sys.addBook(name,author,number,publishing,price);
+				sys.bookArr.push(book);
 				console.log(data.result.book[i].name);
 			}
 		}
 		//添加书籍
-		function add(){
+		    $('#add').on('click',function(){
 			var name=document.getElementById("name").value;
         	var author=document.getElementById("author").value;
 			var number=document.getElementById("number").value;
 			var publishing=document.getElementById("publish").value;
-			var price=document.getElementById("price").value;
-		
-        	var sys=new BookManagerSystem();
-        	console.log(sys);
+			var price=document.getElementById("price").value;		
+        	var book=new Book(name,author,number,publishing,price);
         	sys.addBook(name,author,number,publishing,price);
         	console.log(sys.bookArr);
 				var oldTr = document.getElementById("clone");
@@ -96,8 +107,23 @@
 				tds[3].innerHTML=publishing;
 				tds[4].innerHTML=price;
 				tab.appendChild(newTr);
-		}
+				sys.bookArr.push(book);
+				//删除书籍
+			var $tr=$('<tr></tr>');
+			var $tr=$('<td></td>');
+			$button=$('<button></button>');
+			$button.html('删除');
+			$button.appendTo($tr);
+			$button.on('click',function(){
+				// console.log(1);
+				console.log($(this).parent())
+				$(this).parent().remove();
+		})
+		})
 		
+		
+		
+		//搜索书籍
     </script>
 </body>
 </html>
