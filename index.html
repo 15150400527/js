@@ -245,7 +245,7 @@
 		
 		//浏览书籍
 		var xhr=new XMLHttpRequest();
-		xhr.open("get","http://127.0.0.1:54059/book.json",true);
+		xhr.open("get","book.json",true);
 		xhr.send();
 		xhr.onreadystatechange=function(){
 			if(xhr.readyState==4){
@@ -532,13 +532,13 @@
 			var email=document.getElementById("emails").value;
 			var myReg=/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/;
 			if(user==""){
-					alert("用户名不能为空");
+					alert("用户名不能为空！");
 				    document.getElementById("users").value="";
 					return false;
 				}
 				else{
 					if(password==""){
-					alert("密码不能为空");
+					alert("密码不能为空！");
 					document.getElementById("passwords").value="";
 　　　　			 return false;
 					}
@@ -546,9 +546,10 @@
 						if(myReg.test(email)){
 								var user=new User(user,password,email);
 								sys.userArr.push(user);
+								alert("注册成功！");
 　　　　						return true;
 　　						}else{
-　　　　					alert("邮箱格式不正确");
+　　　　					alert("邮箱格式不正确！");
 							document.getElementById("emails").value="";
 　　　　					return false;
 						}
