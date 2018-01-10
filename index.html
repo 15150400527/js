@@ -11,16 +11,25 @@
 			height:100px;
 			margin-left: 10%;
 			margin-right: 10%;
+			text-align: center;
 		}
 		th{
 			width: 500px;
 			height: 30px;
 			border: 1px solid darkgoldenrod;
 		}
+		#bu{
+			vertical-align: middle;
+		}
 		.add{
 			width: 100%;
 			height: 50px;
 			margin-top: 30px;
+			margin-left: 10%;
+		}
+		.sea{
+			width: 100%;
+			height: 50px;
 			margin-left: 10%;
 		}
 	</style>
@@ -33,6 +42,12 @@
    出版社<input type="text" placeholder="请输入添加书籍的出版社" id="publish">
    单价：<input type="text" placeholder="请输入添加书籍的单价" id="price">
    <input type="button" value="添加" id="add">
+  </div>
+  <div class="sea">
+   书名：<input type="text" placeholder="请输入添加书籍的名称" id="name">
+   作者：<input type="text" placeholder="请输入添加书籍的作者" id="author">
+   出版社<input type="text" placeholder="请输入添加书籍的出版社" id="publish">
+   <input type="button" value="搜索" id="sea">
   </div>
    
    <table border="1" cellspacing="0" cellpadding="0" id="tab">
@@ -50,7 +65,7 @@
 		var sys=new BookManagerSystem();
 		//浏览书籍
 		var xhr=new XMLHttpRequest();
-		xhr.open("get","http://127.0.0.1:64574/book.json",true);
+		xhr.open("get","http://127.0.0.1:54059/book.json",true);
 		xhr.send();
 		xhr.onreadystatechange=function(){
 			if(xhr.readyState==4){
@@ -59,28 +74,50 @@
 					console.log(xhr.responseText);
 					var data = JSON.parse(xhr.responseText);
 					console.log(data);
-					fun(data);
+					fun2(data);
 				}
 			}
 		}
-		function fun(data){
+		function fun2(data){
 			for(var i=0;i<data.result.book.length;i++){
-				var oldTr = document.getElementById("clone");
-				var newTr = oldTr.cloneNode(true);
-				var tds = newTr.getElementsByTagName("th");
-				var tab=document.getElementById("tab");
-				tds[0].innerHTML=data.result.book[i].name;
-				var name=data.result.book[i].name;
-				tds[1].innerHTML=data.result.book[i].author;
-				var author=data.result.book[i].author;
-				tds[2].innerHTML=data.result.book[i].number;
-				var number=data.result.book[i].number;
-				tds[3].innerHTML=data.result.book[i].publishing;
-				var publishing=data.result.book[i].publishing;
-				tds[4].innerHTML=data.result.book[i].price;
-				var price=data.result.book[i].price;
+				var $tr=$('<tr></tr>');
+				$tr.appendTo($('table'));
+
+				var	$td1=$('<td></td>');
+				$td1.html(data.result.book[i].name)
+				$td1.appendTo($tr);
+
+				var	$td2=$('<td></td>');
+				$td2.html(data.result.book[i].author)
+				$td2.appendTo($tr);
+
+				var	$td3=$('<td></td>');
+				$td3.html(data.result.book[i].number)
+				$td3.appendTo($tr);
 				
-				tab.appendChild(newTr);
+				var	$td4=$('<td></td>');
+				$td4.html(data.result.book[i].publishing)
+				$td4.appendTo($tr);
+				
+				var	$td5=$('<td></td>');
+				$td5.html(data.result.book[i].price)
+				$td5.appendTo($tr);
+
+				//删除书籍
+				$button=$('<button></button>');
+				$button.html('删除');
+				$button.appendTo($tr);
+				$button.on('click',function(){
+				// console.log(1);
+				console.log($(this).parent())
+				$(this).parent().remove();
+				})
+	
+				var name=data.result.book[i].name;
+				var author=data.result.book[i].author;
+				var number=data.result.book[i].number;
+				var publishing=data.result.book[i].publishing;
+				var price=data.result.book[i].price;
 				var book=new Book(name,author,number,publishing,price);
         		sys.addBook(name,author,number,publishing,price);
 				sys.bookArr.push(book);
@@ -96,33 +133,42 @@
 			var price=document.getElementById("price").value;		
         	var book=new Book(name,author,number,publishing,price);
         	sys.addBook(name,author,number,publishing,price);
-        	console.log(sys.bookArr);
-				var oldTr = document.getElementById("clone");
-				var newTr = oldTr.cloneNode(true);
-				var tds = newTr.getElementsByTagName("th");
-				var tab=document.getElementById("tab");
-				tds[0].innerHTML=name;
-				tds[1].innerHTML=author;
-				tds[2].innerHTML=number;
-				tds[3].innerHTML=publishing;
-				tds[4].innerHTML=price;
-				tab.appendChild(newTr);
-				sys.bookArr.push(book);
+			console.log(sys.bookArr);			
+				var $tr=$('<tr></tr>');
+				$tr.appendTo($('table'));
+
+				var	$td1=$('<td></td>');
+				$td1.html(name)
+				$td1.appendTo($tr);
+
+				var	$td2=$('<td></td>');
+				$td2.html(author)
+				$td2.appendTo($tr);
+
+				var	$td3=$('<td></td>');
+				$td3.html(number)
+				$td3.appendTo($tr);
+				
+				var	$td4=$('<td></td>');
+				$td4.html(publishing)
+				$td4.appendTo($tr);
+				
+				var	$td5=$('<td></td>');
+				$td5.html(price)
+				$td5.appendTo($tr);
+
 				//删除书籍
-			var $tr=$('<tr></tr>');
-			var $tr=$('<td></td>');
-			$button=$('<button></button>');
-			$button.html('删除');
-			$button.appendTo($tr);
-			$button.on('click',function(){
+				$button=$('<button></button>');
+				$button.html('删除');
+				$button.appendTo($tr);
+				$button.on('click',function(){
 				// console.log(1);
 				console.log($(this).parent())
 				$(this).parent().remove();
+				})
+				sys.bookArr.push(book);
 		})
-		})
-		
-		
-		
+				
 		//搜索书籍
     </script>
 </body>
