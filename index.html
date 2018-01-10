@@ -2,9 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>图书管理系统</title>
     <script type="text/javascript" src="mode.js"></script>
     <script type="text/javascript" src="jquery-3.2.1.js"></script>
+     <link rel="stylesheet" href="css/bootstrap.css">
+      <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.js"></script>
+    <![ednif]-->
     <style>
 		.title{
             height: 110px;
@@ -13,7 +20,7 @@
 	        position: fixed;
             top: 0;
 	        z-index: 1000;
-	        height: 120px;
+	        height: 100px;
 	        width: 100%;
 	        background-color: black;
 	        box-shadow: 0 4px 4px 4px rgba(0,0,0,0.5) ;
@@ -21,8 +28,10 @@
         }
 		.list{
 	        width: 70%;
+			margin-top: 20px;
+			margin-left: 220px;
 	        text-align: center;
-	        margin:0 auto;
+	        
         }
 		nav a{
 	        text-align: right;
@@ -44,7 +53,7 @@
 		
 		table{
 			width：100%;
-			height:100px;
+			height:50px;
 			margin-left: 10%;
 			margin-right: 10%;
 			text-align: center;
@@ -53,6 +62,8 @@
 			width: 500px;
 			height: 30px;
 			border: 1px solid darkgoldenrod;
+			text-align: center;
+			vertical-align: middle;
 		}
 		#bu{
 			vertical-align: middle;
@@ -144,9 +155,29 @@
 		.tip{
 			text-align: left;
 			margin-left: 10px;
-			margin-top: 130px;
+			margin-top: 60px;
 		}
-		
+		.row{
+			margin-left: -70px;
+		}
+		 @media only screen and (min-width:700px){
+			 .row img{
+				width: 200px;
+				height: 200px;
+			 }
+        }
+        @media only screen and (min-width:700px) and(max-width:700px){
+             .row img{
+				width: 100px;
+				height: 100px;
+			 }
+        }
+        @media only screen and (max-width:700px){
+             .row img{
+				width: 50px;
+				height: 50px;
+			 }
+        }
 	</style>
 </head>
 <body>
@@ -158,7 +189,7 @@
 					<a href="#ss" >搜索图书</a>
 					<a href="#ll">浏览图书</a> 
 					<a href="#ssjg">搜索结果</a>  
-					<a onclick="showPopup(500,400)">登录/注册</a>          
+					<a onclick="showPopup(1000,400)">登录/注册</a>          
 				</div>
     </nav>
    </div>
@@ -176,7 +207,10 @@
    <input type="button" value="添加" id="add">
   </div>
   <a name="ss"></a>
- <h1>搜索图书</h1> 
+ <div class="row">
+ <div class="col-md-1"></div>
+ 	<div class="col-md-6">
+ 		<h1>搜索图书</h1> 
   <p class="p1">详细搜索(必须输入所需书籍的全部信息：书名，作者，出版社）</p>
   <div class="sea">
    书名：<input type="text" placeholder="请输入搜索书籍的名称" id="names">
@@ -189,6 +223,11 @@
    出版社<input type="text" placeholder="请输入搜索书籍的出版社" id="publishss">
    <input type="button" value="搜索" id="seas"><br>
   </div>
+ 	</div>
+ 	<div class="col-md-1"></div>
+ 	<div class="col-md-3"><img src="./image/1.gif" alt="" style="text-align: center;vertical-align: middle;"></div>
+ 	<div class="col-md-1"></div>
+ </div>
    
     <a name="ll"></a> 
    <h1>库内图书信息</h1>
