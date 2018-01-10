@@ -23,18 +23,24 @@
 		}
 		.add{
 			width: 100%;
-			height: 50px;
 			margin-top: 30px;
 			margin-left: 10%;
 		}
 		.sea{
 			width: 100%;
-			height: 50px;
+			height: 100px;
+			margin-left: 10%;
+		}
+		h1{
+			margin-left: 10%;
+		}
+		.p1{
 			margin-left: 10%;
 		}
 	</style>
 </head>
 <body>
+ <h1>添加图书</h1>
   <div class="add">
    书名：<input type="text" placeholder="请输入添加书籍的名称" id="name">
    作者：<input type="text" placeholder="请输入添加书籍的作者" id="author">
@@ -43,13 +49,20 @@
    单价：<input type="text" placeholder="请输入添加书籍的单价" id="price">
    <input type="button" value="添加" id="add">
   </div>
+  <h1>搜索图书</h1>
+  <p class="p1">详细搜索(必须输入所需书籍的全部信息：书名，作者，出版社）</p>
   <div class="sea">
-   书名：<input type="text" placeholder="请输入添加书籍的名称" id="name">
-   作者：<input type="text" placeholder="请输入添加书籍的作者" id="author">
-   出版社<input type="text" placeholder="请输入添加书籍的出版社" id="publish">
-   <input type="button" value="搜索" id="sea">
+   书名：<input type="text" placeholder="请输入搜索书籍的名称" id="names">
+   作者：<input type="text" placeholder="请输入搜索书籍的作者" id="authors">
+   出版社<input type="text" placeholder="请输入搜索书籍的出版社" id="publishs">
+   <input type="button" value="搜索" id="sea"><br>
+   <p>模糊搜索（可只输入所需书籍的部分信息：书名，作者，或出版社）</p>
+   书名：<input type="text" placeholder="请输入搜索书籍的名称" id="namess">
+   作者：<input type="text" placeholder="请输入搜索书籍的作者" id="authorss">
+   出版社<input type="text" placeholder="请输入搜索书籍的出版社" id="publishss">
+   <input type="button" value="搜索" id="seas"><br>
   </div>
-   
+   <h1>库内图书信息</h1>
    <table border="1" cellspacing="0" cellpadding="0" id="tab">
 			<tr id="clone">
 				<th>图书名</th>
@@ -60,7 +73,17 @@
 				<th>操作</th>
 			</tr>
 		</table>
-   
+   <h1>搜索结果</h1>
+   <table border="1" cellspacing="0" cellpadding="0" id="tabs">
+			<tr id="clone">
+				<th>图书名</th>
+				<th>作者名</th>
+				<th>数量</th>
+				<th>出版社</th>
+				<th>单价</th>
+				<th>操作</th>
+			</tr>
+		</table>
     <script>
 		var sys=new BookManagerSystem();
 		//浏览书籍
@@ -81,7 +104,7 @@
 		function fun2(data){
 			for(var i=0;i<data.result.book.length;i++){
 				var $tr=$('<tr></tr>');
-				$tr.appendTo($('table'));
+				$tr.appendTo($('#tab'));
 
 				var	$td1=$('<td></td>');
 				$td1.html(data.result.book[i].name)
@@ -119,23 +142,29 @@
 				var publishing=data.result.book[i].publishing;
 				var price=data.result.book[i].price;
 				var book=new Book(name,author,number,publishing,price);
-        		sys.addBook(name,author,number,publishing,price);
 				sys.bookArr.push(book);
 				console.log(data.result.book[i].name);
 			}
 		}
 		//添加书籍
 		    $('#add').on('click',function(){
+				var num=0;
 			var name=document.getElementById("name").value;
         	var author=document.getElementById("author").value;
 			var number=document.getElementById("number").value;
 			var publishing=document.getElementById("publish").value;
 			var price=document.getElementById("price").value;		
         	var book=new Book(name,author,number,publishing,price);
-        	sys.addBook(name,author,number,publishing,price);
-			console.log(sys.bookArr);			
-				var $tr=$('<tr></tr>');
-				$tr.appendTo($('table'));
+        	for(var i=0;i<sys.bookArr.length;i++){
+        		if(sys.bookArr[i].name==name&&sys.bookArr[i].author==author){
+            	alert("图书已经存在");
+					num++;
+			}
+			}
+				console.log(sys.bookArr);	
+				if(num==0){
+					var $tr=$('<tr></tr>');
+				$tr.appendTo($('#tab'));
 
 				var	$td1=$('<td></td>');
 				$td1.html(name)
@@ -167,9 +196,114 @@
 				$(this).parent().remove();
 				})
 				sys.bookArr.push(book);
+				document.getElementById("name").value="";
+				document.getElementById("author").value="";
+				document.getElementById("number").value="";
+				document.getElementById("publish").value="";
+				document.getElementById("price").value="";
+				}
+					
+				
 		})
 				
-		//搜索书籍
+		//详细搜索书籍
+		$('#sea').on('click',function(){
+			var num=0;
+			var name=document.getElementById("names").value;
+        	var author=document.getElementById("authors").value;
+			var publish=document.getElementById("publishs").value;
+			var data = JSON.parse(xhr.responseText);
+				 for(var i=0;i<sys.bookArr.length;i++){
+				 if(sys.bookArr[i].name==name&&sys.bookArr[i].author==author&&sys.bookArr[i].publishing==publish){
+					 num++;
+				var $tr=$('<tr></tr>');
+				$tr.appendTo($('#tabs'));
+
+				var	$td1=$('<td></td>');
+				$td1.html(data.result.book[i].name)
+				$td1.appendTo($tr);
+
+				var	$td2=$('<td></td>');
+				$td2.html(data.result.book[i].author)
+				$td2.appendTo($tr);
+
+				var	$td3=$('<td></td>');
+				$td3.html(data.result.book[i].number)
+				$td3.appendTo($tr);
+				
+				var	$td4=$('<td></td>');
+				$td4.html(data.result.book[i].publishing)
+				$td4.appendTo($tr);
+				
+				var	$td5=$('<td></td>');
+				$td5.html(data.result.book[i].price)
+				$td5.appendTo($tr);
+
+				//删除书籍
+				$button=$('<button></button>');
+				$button.html('删除');
+				$button.appendTo($tr);
+				$button.on('click',function(){
+				// console.log(1);
+				console.log($(this).parent())
+				$(this).parent().remove();
+				})
+					  }
+					 
+				 }
+			if(num<=0){
+				alert("库中不存在所要搜索的图书！");
+			}
+			})
+		//模糊搜索书籍
+		$('#seas').on('click',function(){
+			var num=0;
+			var name=document.getElementById("namess").value;
+        	var author=document.getElementById("authorss").value;
+			var publish=document.getElementById("publishss").value;
+			var data = JSON.parse(xhr.responseText);
+				 for(var i=0;i<sys.bookArr.length;i++){
+				 if(sys.bookArr[i].name==name||sys.bookArr[i].author==author||sys.bookArr[i].publishing==publish){
+					 num++;
+				var $tr=$('<tr></tr>');
+				$tr.appendTo($('#tabs'));
+
+				var	$td1=$('<td></td>');
+				$td1.html(data.result.book[i].name)
+				$td1.appendTo($tr);
+
+				var	$td2=$('<td></td>');
+				$td2.html(data.result.book[i].author)
+				$td2.appendTo($tr);
+
+				var	$td3=$('<td></td>');
+				$td3.html(data.result.book[i].number)
+				$td3.appendTo($tr);
+				
+				var	$td4=$('<td></td>');
+				$td4.html(data.result.book[i].publishing)
+				$td4.appendTo($tr);
+				
+				var	$td5=$('<td></td>');
+				$td5.html(data.result.book[i].price)
+				$td5.appendTo($tr);
+
+				//删除书籍
+				$button=$('<button></button>');
+				$button.html('删除');
+				$button.appendTo($tr);
+				$button.on('click',function(){
+				// console.log(1);
+				console.log($(this).parent())
+				$(this).parent().remove();
+				})
+					  }
+					 
+				 }
+			if(num<=0){
+				alert("库中不存在所要搜索的图书！");
+			}
+			})
     </script>
 </body>
 </html>

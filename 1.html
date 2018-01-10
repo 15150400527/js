@@ -1,27 +1,53 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
 <body>
-<input type="button" value="add" onclick="add()"/>
-<ul id="ul"><li><input type="button" value="delete" onclick="del(event)"/></li>
-<li><input type="button" value="delete" onclick="del(event)"/></li>
-<li><input type="button" value="delete" onclick="del(event)"/></li>
-<li><input type="button" value="delete" onclick="del(event)"/></li>
-<li><input type="button" value="delete" onclick="del(event)"/></li>
-<li><input type="button" value="delete" onclick="del(event)"/></li>
-<li><input type="button" value="delete" onclick="del(event)"/></li>
-<li><input type="button" value="delete" onclick="del(event)"/></li></ul>
+	<input id="key-word" class="key-word" value="请输入搜索内容">
+<button id="search-button">搜索</button>
+<div id="content">
+  <p>这是主体内容，有很多内容，abcdefg123456</p>
+  <p>这是主体内容，有很多内容，很多很多啊啊啊……，比如987654321啊啊啊啊</p>
+  <p>这是主体内容，有很多内容，很多很多啊啊啊……，比如higklmnopqrst啊啊啊啊</p>
+  <p>aaa</p>
+  <p>bbb</p>
+  <p>ccc</p>
+  <p>dddd</p>
+  <p>eee</p>
+  <p>fff</p>
+</div>
+<script>
+	function $(id) {
+    return document.getElementById(id)
+}
+var putWordsObj = $('key-word');
+putWordsObj.onfocus = function() {
+    if (this.value == '请输入搜索内容') this.value = '';
+}
+putWordsObj.onblur = function() {
+    if (!this.value) this.value = '请输入搜索内容';
+}
+//search
+$('search-button').onclick = function() {
+    var content = $('content').innerHTML;
+    var keyWord = $('key-word').value;
+    content = search_do(content, keyWord);
+    $('content').innerHTML = content;
+	document.getElementById("key-word").value="";
+    //alert(content)
+}
+function search_do(content, keyWord) {
+    var keyWordArr = keyWord.replace(/[\s]+/g, ' ').split(' ');
+    var re;
+    for (var n = 0; n < keyWordArr.length; n++) {
+        //re = new RegExp(">[\s\S]*?"+keyWordArr[n]+"[\s\S]*?<\S","gmi");
+        re = new RegExp("" + keyWordArr[n] + "", "gmi");
+        content = content.replace(re, '<span style="color:red;font-weight: bold;">' + keyWordArr[n] + '</span>');
+    }
+    return content;
+}
+	</script>
 </body>
 </html>
-<script>
-function add(){
-    var ul = document.getElementById("ul");
-    var li = ul.firstChild.cloneNode(true);
-    ul.appendChild(li);
-}
-function del(event){
-    var obj = event.srcElement||event.target;
-    var li  = obj.parentNode;
-    var ul = document.getElementById("ul");
-    ul.removeChild(li);
- 
-}
-</script>

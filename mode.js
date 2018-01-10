@@ -11,11 +11,3 @@ Book.prototype.show=function(){
 function BookManagerSystem(){
     this.bookArr=[];//用来存储Book类对象
 }
-BookManagerSystem.prototype.addBook=function(name,author,number,publishing,price){
-    for(var i=0;i<this.bookArr.length;i++){
-        if(this.bookArr[i].name==name&&this.bookArr[i].author==author){
-            alert("图书已经存在");
-           break;
-		}
-		}
-	}
