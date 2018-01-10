@@ -38,6 +38,18 @@
 				"price":"￥39.00"
 			}
 		],
+		"user":[
+			{
+				"user":"12345",
+				"password":"12345",
+				"email":"12345@qq.com"
+			},
+			{
+				"user":"111",
+				"password":"222",
+				"email":"333@qq.com"
+			}
+		],
 		"totalnumber":4
 	}	
 }

@@ -1,53 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>在此处插入标题</title>
+<script type="text/javascript">
+//判断用户输入的电子邮箱格式是否正确
+function checkEmail(){
+　　var myforms=document.forms;
+　　var myemail=myforms[0].email.value;
+　　var myReg=/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/;
+
+　　if(myReg.test(myemail)){
+　　　　return true;
+　　}else{
+　　　　myspan.innerText="邮箱格式不对!";
+　　　　return false;
+}
+}
+
+</script>
 </head>
 <body>
-	<input id="key-word" class="key-word" value="请输入搜索内容">
-<button id="search-button">搜索</button>
-<div id="content">
-  <p>这是主体内容，有很多内容，abcdefg123456</p>
-  <p>这是主体内容，有很多内容，很多很多啊啊啊……，比如987654321啊啊啊啊</p>
-  <p>这是主体内容，有很多内容，很多很多啊啊啊……，比如higklmnopqrst啊啊啊啊</p>
-  <p>aaa</p>
-  <p>bbb</p>
-  <p>ccc</p>
-  <p>dddd</p>
-  <p>eee</p>
-  <p>fff</p>
-</div>
-<script>
-	function $(id) {
-    return document.getElementById(id)
-}
-var putWordsObj = $('key-word');
-putWordsObj.onfocus = function() {
-    if (this.value == '请输入搜索内容') this.value = '';
-}
-putWordsObj.onblur = function() {
-    if (!this.value) this.value = '请输入搜索内容';
-}
-//search
-$('search-button').onclick = function() {
-    var content = $('content').innerHTML;
-    var keyWord = $('key-word').value;
-    content = search_do(content, keyWord);
-    $('content').innerHTML = content;
-	document.getElementById("key-word").value="";
-    //alert(content)
-}
-function search_do(content, keyWord) {
-    var keyWordArr = keyWord.replace(/[\s]+/g, ' ').split(' ');
-    var re;
-    for (var n = 0; n < keyWordArr.length; n++) {
-        //re = new RegExp(">[\s\S]*?"+keyWordArr[n]+"[\s\S]*?<\S","gmi");
-        re = new RegExp("" + keyWordArr[n] + "", "gmi");
-        content = content.replace(re, '<span style="color:red;font-weight: bold;">' + keyWordArr[n] + '</span>');
-    }
-    return content;
-}
-	</script>
+　　<form action="#">
+　　　　<table>
+　　　　<tr><td>邮箱：<input type="text" id=email></td><td><span id=myspan style="text-size:18pt;color:red;"></span></td></tr>
+　　　　<tr><td><input type="submit" value="提交" onclick="return checkEmail()"/></td><td></td></tr>
+　　　　</table>
+　　</form>
+
+
 </body>
 </html>

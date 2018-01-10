@@ -6,6 +6,42 @@
     <script type="text/javascript" src="mode.js"></script>
     <script type="text/javascript" src="jquery-3.2.1.js"></script>
     <style>
+		.title{
+            height: 110px;
+        }
+        nav{
+	        position: fixed;
+            top: 0;
+	        z-index: 1000;
+	        height: 120px;
+	        width: 100%;
+	        background-color: black;
+	        box-shadow: 0 4px 4px 4px rgba(0,0,0,0.5) ;
+            opacity:0.8;
+        }
+		.list{
+	        width: 70%;
+	        text-align: center;
+	        margin:0 auto;
+        }
+		nav a{
+	        text-align: right;
+	        margin-right:10% ;
+            text-decoration: none;
+            color:white;
+            font-family:KaiTi;
+        }
+        nav a:hover{
+	        color: darkgray;
+            text-decoration: none;
+        }
+		nav h1{
+			color: white;
+			text-align: center;
+			font-size: 30px;
+		}
+		
+		
 		table{
 			width：100%;
 			height:100px;
@@ -37,10 +73,100 @@
 		.p1{
 			margin-left: 10%;
 		}
+		
+		.footer{
+	background: #565555;
+    position: relative;
+    width: 100%;
+    height: 200px;
+    margin-top: 30px;
+    padding-bottom: 10px;
+    text-shadow: 1px 1px 1px white;
+    color: whitesmoke;
+    overflow: hidden;
+    }
+    .footer_left{
+	width: 45%;
+	height: 100%;
+	border-right: 1px solid darkgray;
+	position: relative;
+    }
+    .footer_right{
+	width: 45%;
+	height: 100%;
+	position: absolute;
+	left: 50%;
+	top: 10px;
+    }
+    .footer_right p{
+	line-height: 10px;
+    }
+    .link{
+	position: absolute;
+	top: 10px;
+	right: 5px;
+    }
+    .link a{
+	width: 30px;
+	float: left;
+	margin-left: 6px;
+    }
+    .link a img{
+	width: 100%;
+    }	
+		#tc,#tc2{ 
+			position: absolute; 
+			position: fixed;
+			visibility: hidden; 
+			overflow: hidden; 
+			border:1px solid #CCC; 
+			background-color:#F9F9F9; 
+			border:1px solid #333; 
+			padding:50px; 
+			text-align: center;
+			top: 0;
+	        z-index: 1000;
+		} 
+		#tc a{
+			font-family: YouYuan;
+			color: black;
+		}
+		#tc a:hover{
+			color: darkgray;
+		}
+		#tc2 a{
+			font-family: YouYuan;
+			color: black;
+		}
+		#tc2 a:hover{
+			color: darkgray;
+		}
+		.tip{
+			text-align: left;
+			margin-left: 10px;
+			margin-top: 130px;
+		}
+		
 	</style>
 </head>
 <body>
- <h1>添加图书</h1>
+<div class="title">
+       <nav>
+		<h1>图书管理系统</h1>
+         <div class="list">
+                    <a href="#tj">添加图书</a>
+					<a href="#ss" >搜索图书</a>
+					<a href="#ll">浏览图书</a> 
+					<a href="#ssjg">搜索结果</a>  
+					<a onclick="showPopup(500,400)">登录/注册</a>          
+				</div>
+    </nav>
+   </div>
+		
+  <div class="con">
+  	<a name="dh"></a>
+ <a name="tj"></a>
+ <h1>添加图书</h1> 
   <div class="add">
    书名：<input type="text" placeholder="请输入添加书籍的名称" id="name">
    作者：<input type="text" placeholder="请输入添加书籍的作者" id="author">
@@ -49,7 +175,8 @@
    单价：<input type="text" placeholder="请输入添加书籍的单价" id="price">
    <input type="button" value="添加" id="add">
   </div>
-  <h1>搜索图书</h1>
+  <a name="ss"></a>
+ <h1>搜索图书</h1> 
   <p class="p1">详细搜索(必须输入所需书籍的全部信息：书名，作者，出版社）</p>
   <div class="sea">
    书名：<input type="text" placeholder="请输入搜索书籍的名称" id="names">
@@ -62,6 +189,8 @@
    出版社<input type="text" placeholder="请输入搜索书籍的出版社" id="publishss">
    <input type="button" value="搜索" id="seas"><br>
   </div>
+   
+    <a name="ll"></a> 
    <h1>库内图书信息</h1>
    <table border="1" cellspacing="0" cellpadding="0" id="tab">
 			<tr id="clone">
@@ -73,6 +202,7 @@
 				<th>操作</th>
 			</tr>
 		</table>
+	<a name="ssjg"></a> 
    <h1>搜索结果</h1>
    <table border="1" cellspacing="0" cellpadding="0" id="tabs">
 			<tr id="clone">
@@ -84,8 +214,35 @@
 				<th>操作</th>
 			</tr>
 		</table>
+  </div>
+   <div id="tc">
+   		<h1>登录</h1>
+   		<input type="text" placeholder="请输入您的用户名" id="user"><br>
+   		<input type="text" placeholder="请输入您的密码" id="password"><br>
+   		<button onclick="dl()">登录</button><br>
+   		<a onclick="qzc()">注册新账号</a>
+   		<div class="tip">
+			<p>测试账号1：12345&nbsp;&nbsp;&nbsp;&nbsp;密码1：12345</p>
+   			<p>测试账号2：111&nbsp;&nbsp;&nbsp;&nbsp;密码2：222</p> 
+   		</div>
+   		
+    </div>
+    <div id="tc2">
+   		<h1>注册</h1>
+   		<input type="text" placeholder="请输入您的用户名" id="users"><br>
+   		<input type="text" placeholder="请输入您的密码" id="passwords"><br>
+   		<input type="text" placeholder="请输入您的电子邮箱" id="emails"><br>
+   		<button onclick="zc()">注册</button>
+   		<a onclick="qdl()">返回登录</a>
+   		<div class="tip">
+			<p>用户名不能为空</p>
+   			<p>密码不能为空</p> 
+   			<p>邮箱格式为："a-z、A-Z、0-9"+"@"+"a-z、A-Z、0-9"+\.)+"com、cn、net、org"</p>
+   		</div>
+    </div>
     <script>
 		var sys=new BookManagerSystem();
+		
 		//浏览书籍
 		var xhr=new XMLHttpRequest();
 		xhr.open("get","http://127.0.0.1:54059/book.json",true);
@@ -96,9 +253,21 @@
 					//处理数据
 					console.log(xhr.responseText);
 					var data = JSON.parse(xhr.responseText);
+					var data2 = JSON.parse(xhr.responseText);
 					console.log(data);
 					fun2(data);
+					fun(data2);
+					showPopup(500,400);
 				}
+			}
+		}
+		function fun(data2){
+			for(var i=0;i<data2.result.user.length;i++){
+				var user=data2.result.user[i].user;
+				var password=data2.result.user[i].password;
+				var user=new User(user,password);
+				sys.userArr.push(user);
+				console.log(data2.result.user[i].name);
 			}
 		}
 		function fun2(data){
@@ -254,6 +423,9 @@
 			if(num<=0){
 				alert("库中不存在所要搜索的图书！");
 			}
+			document.getElementById("names").value="";
+			document.getElementById("authors").value="";
+			document.getElementById("publishs").value="";
 			})
 		//模糊搜索书籍
 		$('#seas').on('click',function(){
@@ -303,7 +475,104 @@
 			if(num<=0){
 				alert("库中不存在所要搜索的图书！");
 			}
+			document.getElementById("namess").value="";
+			document.getElementById("authorss").value="";
+			document.getElementById("publishss").value="";
 			})
+		function showPopup(w,h){ 
+		var popUp = document.getElementById("tc"); 
+		popUp.style.top = "150px"; 
+		popUp.style.left = "350px"; 
+		popUp.style.width = w + "px"; 
+		popUp.style.height = h + "px"; 
+		popUp.style.visibility = "visible"; 
+		var popUp2 = document.getElementById("tc2"); 
+		popUp2.style.top = "150px"; 
+		popUp2.style.left = "350px"; 
+		popUp2.style.width = w + "px"; 
+		popUp2.style.height = h + "px"; 
+		popUp2.style.visibility = "hidden"; 
+} 
+
+		function dl(){
+			var num=0;
+			var user=document.getElementById("user").value;
+			var password=document.getElementById("password").value;
+			var popUp = document.getElementById("tc"); 
+			for(var i=0;i<sys.userArr.length;i++){
+				if(sys.userArr[i].user==user&&sys.userArr[i].password==password){
+					 	num++;
+				}
+			}
+			
+			if(num==0){
+				alert("用户名或密码错误，登录失败！");
+				document.getElementById("user").value="";
+				document.getElementById("password").value="";
+			}else{
+				alert("登录成功！");
+				popUp.style.visibility = "hidden"; 
+			}					
+    }
+		function qzc(){
+			var popUp = document.getElementById("tc"); 
+			popUp.style.visibility = "hidden"; 
+			var popUp2 = document.getElementById("tc2"); 
+			popUp2.style.visibility = "visible"; 
+		}
+		function qdl(){
+			var popUp = document.getElementById("tc2"); 
+			popUp.style.visibility = "hidden"; 
+			var popUp2 = document.getElementById("tc"); 
+			popUp2.style.visibility = "visible"; 
+		}
+		function zc(){
+			var user=document.getElementById("users").value;
+			var password=document.getElementById("passwords").value;
+			var email=document.getElementById("emails").value;
+			var myReg=/^[a-zA-Z0-9_-]+@([a-zA-Z0-9]+\.)+(com|cn|net|org)$/;
+			if(user==""){
+					alert("用户名不能为空");
+				    document.getElementById("users").value="";
+					return false;
+				}
+				else{
+					if(password==""){
+					alert("密码不能为空");
+					document.getElementById("passwords").value="";
+　　　　			 return false;
+					}
+					else{
+						if(myReg.test(email)){
+								var user=new User(user,password,email);
+								sys.userArr.push(user);
+　　　　						return true;
+　　						}else{
+　　　　					alert("邮箱格式不正确");
+							document.getElementById("emails").value="";
+　　　　					return false;
+						}
+					}
+				}		
+		}
     </script>
+     <div class="footer">
+				<div class="footer_left">
+					<div class="link">
+						<a href="https://weibo.com/"><img src="./image/contact3.png"/></a>
+						<a href="https://wx.qq.com/"><img src="./image/contact2.png"/></a>
+						<a href="https://im.qq.com/"><img src="./image/contact1.png"/></a>
+					</div>
+				</div>
+				<div class="footer_right">
+					<a href="#dh">返回顶部</a>
+					<p></p>
+					<p></p>
+					<h1>图书馆管理系统</h1>
+					<p>QQ : 765453430</p>
+					<p>Email : library@163.com</p>
+					<p>Copyright&copy; library.com All Rights Reserved</p>
+				</div>
+				</div>
 </body>
 </html>
